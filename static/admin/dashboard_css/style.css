@@ -415,3 +415,14 @@ body {
 .drop-icons {
   display: none;
 }
+
+/* ============ */
+.admin-name {
+  position: absolute;
+  top: 1.5%;
+  left: 100%;
+  transform: translateX(-200%);
+  z-index: 10000;
+  color: #437f97;
+  font-size: 1.6rem;
+}

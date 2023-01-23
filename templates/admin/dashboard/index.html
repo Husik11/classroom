@@ -25,53 +25,53 @@
     <div class="form-cont half">
       {{ form.firstname.label }}
       {{ form.firstname(placeholder="First Name") }}
-<!--      <label for="firstname">First Name</label>-->
-<!--      <input name="firstname" type="text" placeholder="First Name" required />-->
+      <!--      <label for="firstname">First Name</label>-->
+      <!--      <input name="firstname" type="text" placeholder="First Name" required />-->
     </div>
     <div class="form-cont half">
-          {{ form.lastname.label }}
-          {{ form.lastname(placeholder="Last Name") }}
-<!--      <label for="lastname">Last Name</label>-->
-<!--      <input name="lastname" type="text" placeholder="Last Name" required />-->
+      {{ form.lastname.label }}
+      {{ form.lastname(placeholder="Last Name") }}
+      <!--      <label for="lastname">Last Name</label>-->
+      <!--      <input name="lastname" type="text" placeholder="Last Name" required />-->
     </div>
     <div class="form-cont full">
-          {{ form.email.label }}
-          {{ form.email(placeholder="Email") }}
-          {% if form.email.errors %}
-          <ul class=errors>
-            {% for error in form.email.errors %}
-          <li>{{ error }}</li>
-          {% endfor %}
-          {% endif %}
-          </ul>
-<!--      <label for="email">Email</label>-->
-<!--      <input name="email" type="email" placeholder="Email" required />-->
+      {{ form.email.label }}
+      {{ form.email(placeholder="Email") }}
+      {% if form.email.errors %}
+      <ul class=errors>
+        {% for error in form.email.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+        {% endif %}
+      </ul>
+      <!--      <label for="email">Email</label>-->
+      <!--      <input name="email" type="email" placeholder="Email" required />-->
     </div>
     <div class="form-cont half">
       {{ form.username.label }}
       {{ form.username(placeholder="Username") }}
-<!--      <label for="username">Username</label>-->
-<!--      <input name="username" type="text" placeholder="Username" required />-->
+      <!--      <label for="username">Username</label>-->
+      <!--      <input name="username" type="text" placeholder="Username" required />-->
     </div>
     <div class="form-cont half">
       {{ form.phone.label }}
-<!--      <label for="phone">Phone Number</label>-->
+      <!--      <label for="phone">Phone Number</label>-->
       <div class="phone-cont">
         <div class="flag-cont">
           <img src="../../../static/admin/dashboard_images/am.svg" alt="" class="flag-icon">
           <p class="num">+374</p>
         </div>
-          {{ form.phone(placeholder="Phone") }}
-<!--        <input name="phone" type="tel" placeholder="Phone Number" required />-->
+        {{ form.phone(placeholder="Phone") }}
+        <!--        <input name="phone" type="tel" placeholder="Phone Number" required />-->
       </div>
 
     </div>
     <div class="form-cont half passwd">
-<!--      <label for="password">Password</label>-->
+      <!--      <label for="password">Password</label>-->
       {{ form.password.label }}
       <div class="passwd-child">
         {{ form.password(placeholder="Password") }}
-<!--        <input id="password" name="password" type="password" placeholder="Password" required />-->
+        <!--        <input id="password" name="password" type="password" placeholder="Password" required />-->
         <div class="eye-cont">
           <ion-icon class="close-eye" name="eye-off-outline"></ion-icon>
           <ion-icon class="eye none" name="eye-outline"></ion-icon>
@@ -82,12 +82,12 @@
 
     </div>
     <div class="form-cont half passwd">
-            {{ form.password_confirm.label }}
+      {{ form.password_confirm.label }}
 
-<!--      <label for="confirm-password">Confirm Password</label>-->
+      <!--      <label for="confirm-password">Confirm Password</label>-->
       <div class="passwd-child">
-            {{ form.password_confirm(placeholder="Confirm Password") }}
-<!--        <input id="confirm-password" name="confirm-password" type="password" placeholder="Confirm Password" required />-->
+        {{ form.password_confirm(placeholder="Confirm Password") }}
+        <!--        <input id="confirm-password" name="confirm-password" type="password" placeholder="Confirm Password" required />-->
         <div class="eye-cont">
           <ion-icon class="close-eye2" name="eye-off-outline"></ion-icon>
           <ion-icon class="eye2 none" name="eye-outline"></ion-icon>
@@ -96,11 +96,12 @@
     </div>
     <div class="for-form-buttons">
       <button type="button" class="form-cancel">Cancel</button>
-<!--      <p><input class="form-btn" type=submit value=Register></p>-->
+      <!--      <p><input class="form-btn" type=submit value=Register></p>-->
       <button type=submit class="form-btn">Submit</button>
     </div>
 
   </form>
+  <p class="admin-name">username</p>
   <main class="main-container">
     <section class="left-container">
       <div class="img-box">
@@ -136,11 +137,32 @@
             <div class="item">Phone</div>
           </div>
           {% for user in users %}
-            <h1> {{ user.username }} </h1>
-            {% endfor %}
-<!--          <div id="tableA">-->
+          <h1> {{ user.username }} </h1>
+          {% endfor %}
+          <!--          <div id="tableA">-->
+          <div class="person">
+            <div class="item item1">
+              <div class="text-div">
+                <p>firstname lastname</p>
+                <p class="usName">username</p>
+              </div>
+            </div>
+            <div class="item item2">
+              <p>Email</p>
+            </div>
+            <div class="item item3">
+              <p>Phone</p>
+            </div>
+            <div class="item item4">
+              <!-- delete anelu icon -->
+              <ion-icon name="trash-outline" class="delete person-icon"></ion-icon>
+              <!-- edit anelu icon -->
+              <ion-icon name="create-outline" class="edit person-icon"></ion-icon>
+            </div>
+          </div>
+          <!-- person class-ic sksac minchev stex useri shablonn a -->
 
-<!--          </div>-->
+          <!--          </div>-->
         </div>
         <div id="menthors-container" class="none">
           <header class="secondary-header">
