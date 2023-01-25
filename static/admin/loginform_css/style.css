@@ -94,6 +94,7 @@ body {
 }
 
 .a {
+  border: none;
   background-color: #10C98F;
   padding: 1.2rem 2.4rem;
   border-radius: 0.5rem;
@@ -126,4 +127,11 @@ body {
 
 .none {
   display: none;
+}
+
+
+.smthwrong {
+  color: red;
+  margin-bottom: 0.8rem;
+  font-size: 1.2rem;
 }

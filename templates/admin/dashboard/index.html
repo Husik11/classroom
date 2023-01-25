@@ -41,6 +41,7 @@
           {% endfor %}
           {% endif %}
           </ul>
+
     </div>
     <div class="form-cont half">
       {{ form.username.label }}
@@ -48,18 +49,21 @@
     </div>
     <div class="form-cont half">
       {{ form.phone.label }}
+
       <div class="phone-cont">
         <div class="flag-cont">
           <img src="../../../static/admin/dashboard_images/am.svg" alt="" class="flag-icon">
           <p class="num">+374</p>
         </div>
           {{ form.phone(placeholder="Phone") }}
+
       </div>
     </div>
     <div class="form-cont half passwd">
       {{ form.password.label }}
       <div class="passwd-child">
         {{ form.password(placeholder="Password") }}
+
         <div class="eye-cont">
           <ion-icon class="close-eye" name="eye-off-outline"></ion-icon>
           <ion-icon class="eye none" name="eye-outline"></ion-icon>
@@ -70,6 +74,7 @@
             {{ form.password_confirm.label }}
       <div class="passwd-child">
             {{ form.password_confirm(placeholder="Confirm Password") }}
+
         <div class="eye-cont">
           <ion-icon class="close-eye2" name="eye-off-outline"></ion-icon>
           <ion-icon class="eye2 none" name="eye-outline"></ion-icon>
@@ -78,9 +83,11 @@
     </div>
     <div class="for-form-buttons">
       <button type="button" class="form-cancel">Cancel</button>
+
       <button type=submit class="form-btn">Submit</button>
     </div>
   </form>
+  <p class="admin-name">@{{ username }}</p>
   <main class="main-container">
     <section class="left-container">
       <div class="img-box">
@@ -116,11 +123,31 @@
             <div class="item">Phone</div>
           </div>
           {% for user in users %}
-            <h1> {{ user.username }} </h1>
-            {% endfor %}
-<!--          <div id="tableA">-->
 
-<!--          </div>-->
+          <div class="person">
+            <div class="item item1">
+              <div class="text-div">
+                <p>{{ user.firstname }} {{ user.lastname }}</p>
+                <p class="usName">@{{ user.username }}</p>
+              </div>
+            </div>
+            <div class="item item2">
+              <p>{{ user.email }}</p>
+            </div>
+            <div class="item item3">
+              <p>{{ user.phone }}</p>
+            </div>
+            <div class="item item4">
+              <!-- delete anelu icon -->
+              <ion-icon name="trash-outline" class="delete person-icon"></ion-icon>
+              <!-- edit anelu icon -->
+              <ion-icon name="create-outline" class="edit person-icon"></ion-icon>
+            </div>
+          </div>
+        {% endfor %}
+          <!-- person class-ic sksac minchev stex useri shablonn a -->
+
+          <!--          </div>-->
         </div>
         <div id="menthors-container" class="none">
           <header class="secondary-header">
