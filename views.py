@@ -11,6 +11,7 @@ from helpers import generate_hash
 def load_user(user_id):
     return User.query.get(int(user_id))
 
+
 @app.route('/admin', methods=['GET', 'POST'])
 @app.route('/admin/', methods=['GET', 'POST'])
 def admin():
