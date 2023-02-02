@@ -67,9 +67,7 @@
 
 
 @media(max-width:41.25em) {
-  .admin-name {
-    top: 11.5%;
-  }
+
 
   .form h3 {
     display: flex;

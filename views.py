@@ -1,12 +1,12 @@
-from flask import render_template,request, redirect, url_for
+from flask import render_template, request, redirect, url_for
 from flask_login import login_user, logout_user, login_required, current_user
 from forms import LoginForm, RegisterForm
 from flask_security import roles_required
 
-
 from app import app, db, login_manager
-from models import User
+from models import User, Course
 from helpers import generate_hash
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -35,7 +35,7 @@ def admin():
 
 
 @app.route('/admin/logout')
-def logout():
+def admin_logout():
     logout_user()
     return redirect(url_for('admin'))
 
@@ -117,20 +117,29 @@ def login():
             return render_template('login_form.html', form=form, error=error_message)
     return render_template('application/loginform/index.html', form=form)
 
+
 @app.route('/dashboard', defaults={'username': 'admin'})
 @app.route('/dashboard/<username>')
-@login_required
+# @login_required
 def dashboard(username):
-    return f'<h1>Dashboard {username}</h1>'
+    courses = Course.query.all()
+    users = User.query.all()  #  TODO filter by student
+    return render_template('application/mentor/menthorspage/index.html', username=username, courses=courses, users=users)
 
 
 @app.route('/course/add')
-@login_required
+# @login_required
 def course_add():
     pass
 
 
 @app.route('/course/add_source')
-@login_required
+# @login_required
 def course_add_cource():
     pass
+
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))

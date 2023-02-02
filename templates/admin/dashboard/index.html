@@ -87,7 +87,9 @@
       <button type=submit class="form-btn">Submit</button>
     </div>
   </form>
-  <p class="admin-name">@{{ username }}</p>
+
+
+
   <main class="main-container">
     <section class="left-container">
       <div class="img-box">
@@ -109,6 +111,11 @@
 
     <section class="right-container">
       <div class="main-dashboard">
+        <div class="admin-cont">
+          <p class="admin-name">@{{ username }}</p>
+          <a class="admin-log" href="{{ url_for('admin_logout') }}">log out</a>
+        </div>
+
         <div id="admins-container">
           <header class="secondary-header">
             <h2 class="secondary-heading">Admins</h2>
@@ -145,9 +152,6 @@
             </div>
           </div>
         {% endfor %}
-          <!-- person class-ic sksac minchev stex useri shablonn a -->
-
-          <!--          </div>-->
         </div>
         <div id="menthors-container" class="none">
           <header class="secondary-header">
