@@ -41,10 +41,10 @@
     <div class="usName-log">
       <div class="username-cont">
         <ion-icon class="add-icon" name="person-outline"></ion-icon>
-        <p class="username-text">Username</p>
+        <p class="username-text">{{ username }}</p>
       </div>
       <div class="log-out">
-        <p class="log-out-p">Log out</p>
+        <a class="log-out-p" href="{{ url_for('logout')}}">Log out</a>
         <ion-icon class="log-out-icon" name="log-out-outline"></ion-icon>
       </div>
     </div>

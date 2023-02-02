@@ -4,7 +4,7 @@ from forms import LoginForm, RegisterForm
 from flask_security import roles_required
 
 from app import app, db, login_manager
-from models import User, Course
+from models import User, Course, Progress, FullProgress
 from helpers import generate_hash
 
 
@@ -75,7 +75,7 @@ def admin_edit_user(user_id):
 @app.route('/admin/register', methods=['POST'])
 # @login_required
 def admin_register():
-    form = RegisterForm()
+    # form = RegisterForm()
     if request.method == 'POST':
         data = request.form
         # if form.validate_on_submit():
@@ -87,6 +87,11 @@ def admin_register():
                     phone=data['phone'])
 
         db.session.add(user)
+        db.session.commit()
+        added_user = User.query.filter_by(username=user.username).first()
+        added_user_id = added_user.id
+        fullprogress = FullProgress(progress_value=0, user_id=added_user_id)
+        db.session.add(fullprogress)
         db.session.commit()
     username = current_user.username
     return redirect(url_for('admin_dashboard', username=username))
@@ -111,10 +116,10 @@ def login():
                 return redirect(url_for('dashboard', username=user.username))
             else:
                 error_message = 'Wrong password'
-                return render_template('login_form.html', form=form, error=error_message)
+                return render_template('application/loginform/index.html', form=form, error=error_message)
         else:
             error_message = 'Wrong username'
-            return render_template('login_form.html', form=form, error=error_message)
+            return render_template('application/loginform/index.html', form=form, error=error_message)
     return render_template('application/loginform/index.html', form=form)
 
 
@@ -123,9 +128,21 @@ def login():
 # @login_required
 def dashboard(username):
     courses = Course.query.all()
-    users = User.query.all()  #  TODO filter by student
-    return render_template('application/mentor/menthorspage/index.html', username=username, courses=courses, users=users)
+    users = User.query.all()  # TODO filter by student
+    for user in users:
+        usr = User.query.filter_by(username=user.username).first()
+        usr_id = usr.id
+        fullprg = FullProgress.query.filter_by(id=usr_id).first()
+        user.fullprogress = fullprg.progress_value
+    return render_template('application/mentor/menthorspage/index.html', username=username, courses=courses,
+                           users=users)
 
+@app.route('/courses', defaults = {'course_name':''})
+@app.route('/courses/<course_name>')
+def courses(course_name):
+    username = current_user.username
+    if not course_name:
+        return render_template('application/mentor/coursespage/index.html', username=username)
 
 @app.route('/course/add')
 # @login_required
@@ -135,7 +152,7 @@ def course_add():
 
 @app.route('/course/add_source')
 # @login_required
-def course_add_cource():
+def course_add_course():
     pass
 
 

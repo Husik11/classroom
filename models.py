@@ -19,6 +19,7 @@ class User(db.Model, UserMixin):
     roles = db.relationship('Role', secondary='roles_users',
                             backref=db.backref('users', lazy='dynamic'))
     progresses = db.relationship('Progress', backref='user', lazy='dynamic')
+    full_progresses = db.relationship('FullProgress', backref='user', lazy='dynamic')
 
     # active = db.Column(db.Boolean, unique=False, server_default=0)
 
@@ -54,6 +55,12 @@ class Progress(db.Model):
     progress_value = db.Column(db.Integer, nullable=False, default=0)
     course_id = db.Column(db.Integer, db.ForeignKey('course.id'), nullable=False)  # TODO write table name
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)  # TODO write table name
+
+
+class FullProgress(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    progress_value = db.Column(db.Integer, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
 
 class Course(db.Model):
@@ -127,6 +134,3 @@ def create_superuser():
                 birtday='1985-07-21')
     db.session.add(user)
     db.session.commit()
-
-
-
