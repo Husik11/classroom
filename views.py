@@ -1,6 +1,7 @@
 from flask import render_template,request, redirect, url_for
 from flask_login import login_user, logout_user, login_required, current_user
 from forms import LoginForm, RegisterForm
+from flask_security import roles_required
 
 
 from app import app, db, login_manager
@@ -41,11 +42,10 @@ def logout():
 
 @app.route('/admin/dashboard')
 @app.route('/admin/dashboard/<username>')
-@login_required
+# @login_required
 def admin_dashboard(username):
     users = User.query.all()
     form = RegisterForm()
-
     return render_template('admin/dashboard/index.html', username=username, users=users, form=form)
 
 
@@ -73,7 +73,7 @@ def admin_edit_user(user_id):
 
 
 @app.route('/admin/register', methods=['POST'])
-@login_required
+# @login_required
 def admin_register():
     form = RegisterForm()
     if request.method == 'POST':
@@ -96,7 +96,7 @@ def admin_register():
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('application/loginform/index.html')
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -115,10 +115,10 @@ def login():
         else:
             error_message = 'Wrong username'
             return render_template('login_form.html', form=form, error=error_message)
-    return render_template('login_form.html', form=form)
+    return render_template('application/loginform/index.html', form=form)
 
-
-@app.route('/dashboard_css/<username>')
+@app.route('/dashboard', defaults={'username': 'admin'})
+@app.route('/dashboard/<username>')
 @login_required
 def dashboard(username):
     return f'<h1>Dashboard {username}</h1>'
