@@ -101,7 +101,8 @@ def admin_register():
 
 @app.route('/')
 def index():
-    return render_template('application/loginform/index.html')
+    form = LoginForm()
+    return render_template('application/loginform/index.html', form=form)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -111,7 +112,7 @@ def login():
         data = request.form
         user = User.query.filter_by(username=data['username']).first()
         if user:
-            if data['username'] == user.username and data['password'] == user.password:
+            if data['username'] == user.username and generate_hash(data['password']) == user.password:
                 login_user(user)
                 return redirect(url_for('dashboard', username=user.username))
             else:
