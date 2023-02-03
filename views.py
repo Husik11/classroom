@@ -138,12 +138,14 @@ def dashboard(username):
     return render_template('application/mentor/menthorspage/index.html', username=username, courses=courses,
                            users=users)
 
-@app.route('/courses', defaults = {'course_name':''})
+
+@app.route('/courses', defaults={'course_name': ''})
 @app.route('/courses/<course_name>')
 def courses(course_name):
     username = current_user.username
     if not course_name:
         return render_template('application/mentor/coursespage/index.html', username=username)
+
 
 @app.route('/course/add')
 # @login_required
