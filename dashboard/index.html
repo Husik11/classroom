@@ -21,23 +21,51 @@
         <ion-icon class="form-close" name="close-outline"></ion-icon>
       </div>
     </div>
+
+
+
+    <div class="form-cont full">
+      <label for="teamname">Team Name</label>
+      <input name="teamname" type="text" placeholder="Team Name" required class="inpforTeams none" />
+    </div>
     <div class="form-cont half">
+      <label for="teamlead">Teamlead</label>
+      <input name="teamlead" type="text" placeholder="Teamlead" required class="inpforTeams none" />
+    </div>
+    <div class="form-cont half">
+      <label for="phone">Phone</label>
+      <input name="phone" type="text" placeholder="phone" required class="inpforTeams none" />
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="form-cont half inp">
       <label for="firstname">First Name</label>
       <input name="firstname" type="text" placeholder="First Name" required />
     </div>
-    <div class="form-cont half">
+    <div class="form-cont half inp">
       <label for="lastname">Last Name</label>
       <input name="lastname" type="text" placeholder="Last Name" required />
     </div>
-    <div class="form-cont full">
+    <div class="form-cont half inp">
       <label for="email">Email</label>
       <input name="email" type="email" placeholder="Email" required />
     </div>
-    <div class="form-cont half">
+    <div class="form-cont half inp">
+      <label for="date">Date</label>
+      <input class="dateName" name="date" type="date" required />
+    </div>
+    <div class="form-cont inp">
       <label for="username">Username</label>
       <input name="username" type="text" placeholder="Username" required />
     </div>
-    <div class="form-cont half">
+    <div class="form-cont half inp">
       <label for="phone">Phone Number</label>
       <div class="phone-cont">
         <div class="flag-cont">
@@ -48,7 +76,7 @@
       </div>
 
     </div>
-    <div class="form-cont half passwd">
+    <div class="form-cont half passwd inp">
       <label for="password">Password</label>
       <div class="passwd-child">
         <input id="password" name="password" type="password" placeholder="Password" required />
@@ -61,7 +89,7 @@
 
 
     </div>
-    <div class="form-cont half passwd">
+    <div class="form-cont half passwd inp">
       <label for="confirm-password">Confirm Password</label>
       <div class="passwd-child">
         <input id="confirm-password" name="confirm-password" type="password" placeholder="Confirm Password" required />
@@ -91,6 +119,7 @@
           <div id="admins">Admins</div>
           <div id="menthors">Menthors</div>
           <div id="students">Students</div>
+          <div id="teams">Teams</div>
         </nav>
       </div>
 
@@ -112,6 +141,32 @@
             <div class="item">Phone</div>
           </div>
           <div id="tableA">
+            <div class="person">
+              <div class="item item1">
+                <div class="text-div">
+                  <p>firstname lastname</p>
+                  <p class="usName">username</p>
+                </div>
+              </div>
+              <div class="item item2">
+                <p>Email</p>
+              </div>
+              <div class="item item3">
+                <p>Phone</p>
+              </div>
+              <div class="item item4">
+                <!-- delete anelu icon -->
+                <a href="#" class="iconsA">
+                  <ion-icon name="trash-outline" class="delete person-icon"></ion-icon>
+                </a>
+
+                <!-- edit anelu icon -->
+                <a href="#" class="iconsA">
+                  <ion-icon name="create-outline" class="edit person-icon"></ion-icon>
+                </a>
+
+              </div>
+            </div>
           </div>
         </div>
         <div id="menthors-container" class="none">
@@ -145,6 +200,48 @@
             <div class="item">Phone</div>
           </div>
           <div id="tableS">
+          </div>
+        </div>
+        <div id="teams-container" class="none">
+          <header class="secondary-header">
+            <h2 class="secondary-heading">Teams</h2>
+            <div class="add-container for-teams">
+              <p>Add team</p>
+              <ion-icon class="add-icon" name="person-add-outline"></ion-icon>
+            </div>
+          </header>
+          <div class="example">
+            <div class="item">Team Name</div>
+            <div class="item">teamlead</div>
+            <div class="item">Phone</div>
+          </div>
+          <div id="tableA">
+            <div class="person">
+              <div class="item item1">
+                <div class="text-div">
+                  <p>Name</p>
+                  <!-- <p class="usName">username</p> -->
+                </div>
+              </div>
+              <div class="item item2">
+                <p>teamlead</p>
+              </div>
+              <div class="item item3">
+                <p>Phone</p>
+              </div>
+              <div class="item item4">
+                <!-- delete anelu icon -->
+                <a href="#" class="iconsA">
+                  <ion-icon name="trash-outline" class="delete person-icon"></ion-icon>
+                </a>
+
+                <!-- edit anelu icon -->
+                <a href="#" class="iconsA">
+                  <ion-icon name="create-outline" class="edit person-icon"></ion-icon>
+                </a>
+
+              </div>
+            </div>
           </div>
         </div>
       </div>

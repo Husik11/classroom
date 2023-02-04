@@ -1,16 +1,29 @@
 let admins = document.getElementById("admins")
+let dateName = document.querySelector(".dateName")
+let teams = document.getElementById("teams")
 let menthors = document.getElementById("menthors")
 let students = document.getElementById("students")
 let admins_container = document.getElementById("admins-container")
 let menthors_container = document.getElementById("menthors-container")
 let students_container = document.getElementById("students-container")
+let teams_container = document.getElementById("teams-container")
 let person_count = 0
 let main_arr = []
 let x = admins_container
 let nav = document.querySelector(".nav")
+let inps = Array.from(document.getElementsByClassName("inp"))
+let inpForTeams = Array.from(document.getElementsByClassName("inpforTeams"))
+
+
+
+
+
+
+
 menthors.onclick = () => turn(menthors_container)
 admins.onclick = () => turn(admins_container)
 students.onclick = () => turn(students_container)
+teams.onclick = () => turn(teams_container)
 function turn(y) {
 
   if (x != y && !form.classList[1] && nav.style.opacity !== -5) {
@@ -29,15 +42,32 @@ function turn(y) {
 let button_admins = document.querySelector(".for-admins")
 let button_menthors = document.querySelector(".for-menthors")
 let button_students = document.querySelector(".for-students")
+let button_teams = document.querySelector(".for-teams")
 let form = document.querySelector(".form")
 let table = document.getElementById("table")
 let main = document.querySelector(".main-container")
-
+button_teams.onclick = () => formappear("move")
 button_admins.onclick = () => formappear()
 button_menthors.onclick = () => formappear()
 button_students.onclick = () => formappear()
-function formappear() {
-  console.log(1);
+function formappear(move) {
+  if (move) {
+    for (let i = 0; i < inps.length; i++) {
+      inps[i].classList.add("none")
+      if (i < 3) {
+        inpForTeams[i].classList.remove("none")
+      }
+
+    }
+  } else {
+    for (let i = 0; i < inps.length; i++) {
+      inps[i].classList.remove("none")
+      if (i < 3) {
+        inpForTeams[i].classList.add("none")
+      }
+
+    }
+  }
   form.classList.add("appear")
   main.classList.add("blur")
 }
@@ -256,9 +286,9 @@ function close() {
 
     arr_form[i].children[1].value = ""
   }
-  arr_form[5].children[1].children[1].value = ""
-  arr_form[6].children[1].children[0].value = ""
-  arr_form[7].children[1].children[0].value = ""
+  // arr_form[5].children[1].children[1].value = ""
+  // arr_form[6].children[1].children[0].value = ""
+  // arr_form[7].children[1].children[0].value = ""
 }
 
 
@@ -309,3 +339,7 @@ nonmenu.onclick = () => {
   menu.style.display = "block"
   nav.style.zIndex = -100
 }
+
+
+// =======================
+
