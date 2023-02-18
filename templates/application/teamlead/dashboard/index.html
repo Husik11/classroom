@@ -59,11 +59,13 @@
         <h3>IT Courses</h3>
       </div>
       <div class="courses-names">
-        {% for course in courses %}
+        {% for course in attached_training_course_by_courses %}
+        {% if course %}
           <div class="course-name">
             <img class="course-icon" src="https://assets.stickpng.com/images/5848152fcef1014c0b5e4967.png">
           <p>{{ course.course_name.upper() }}</p>
         </div>
+        {% endif %}
         {% endfor %}
       </div>
     </div>
@@ -154,7 +156,41 @@
         {% endfor %}
       </div>
     </div>
+<!-- teamlead functional -->
+    <div>
+        <h1>
+          Team Lead
+        </h1>
+      <h2>
+        Create Full Course Functional
+      </h2>
+        <div>
+          <h2>Attached Courses for {{ team_of_teamlead.team_name }} Team</h2>
+          {% for course in attached_training_course_by_courses %}
+          <form action="{{ url_for('teamlead_delete_course') }}" method="POST">
+            <label for="course_name">Course Name:</label>
+            <input type="text" id="course_name" name="course" value="{{ course.course_name }}"><br>
+            <input type="submit" value="Delete"><br>
+            --------------------------------
+          </form>
 
+          {% endfor %}
+        </div>
+        <div>
+          <h2>Available Courses</h2>
+            <form action="{{ url_for('teamlead_add_course') }}" method="POST">
+              <input list="avcourslist" name="course">
+                <datalist id="avcourslist">
+                  {% for course in available_not_attached_courses %}
+                    <option value="{{ course.course_name }}">
+                  {% endfor %}
+                </datalist><br>
+              <input type="text" id="course_queue" name="course_queue" value=""><br>
+              <input type="submit">
+            </form>
+        </div>
+    </div>
+<!--    -->
   </main>
 </body>
 

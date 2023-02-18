@@ -6,8 +6,11 @@ class Config:
     SECURITY_REGISTERABLE = True
 
 
+
 class DevEnvConfig(Config):
     HOST = '127.0.0.1'
     PORT = 5000
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = "sqlite:////home/davit/Desktop/projects/personal/classroom/classroom.db"
+    UPLOAD_FOLDER = '/home/davit/Desktop/projects/personal/classroom/videos'
+

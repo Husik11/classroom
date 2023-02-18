@@ -8,4 +8,5 @@ class ErrorMessages:
     password_match = 'Passwords must match'
 
 any_of_in_password = ['!', '@', '#', '$', '%', '&', '*', '.']
+ALLOWED_EXTENSIONS = {'mp4', 'mov', 'wmv', 'avi', 'avchd', 'flv', 'f4v', 'swf', 'mkv', 'mpeg'}
 

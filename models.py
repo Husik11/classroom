@@ -14,32 +14,21 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(100), nullable=False)
     phone = db.Column(db.String(100), nullable=False)
-    # birtday = db.Column(db.DateTime, nullable=False)
+    birthday = db.Column(db.Date, nullable=False)
     create_date = db.Column(db.Date, nullable=False, default=datetime.utcnow)
     roles = db.relationship('Role', secondary='roles_users',
                             backref=db.backref('users', lazy='dynamic'))
-    progresses = db.relationship('Progress', backref='user', lazy='dynamic')
-    full_progresses = db.relationship('FullProgress', backref='user', lazy='dynamic')
-
-    # active = db.Column(db.Boolean, unique=False, server_default=0)
-
-    def __init__(self, firstname, lastname, username, password, email, phone):
-        self.firstname = firstname
-        self.lastname = lastname
-        self.username = username
-        self.password = password
-        self.email = email
-        self.phone = phone
-        # self.birtday = birtday
+    progresses = db.relationship('Progress', cascade="all,delete", backref='user', lazy='dynamic')
+    full_progresses = db.relationship('FullProgress', cascade="all,delete", backref='user', lazy='dynamic')
+    exams = db.relationship('Exam', cascade="all,delete", backref='User', lazy='dynamic')
+    exam_due_dates = db.relationship('ExamDueDates', cascade="all,delete", backref='User', lazy='dynamic')
+    mentor_of_course = db.relationship('MentorOfCourse', cascade="all,delete", backref='User', lazy='dynamic')
 
 
 class Role(db.Model):
     __tablename__ = 'role'
     id = db.Column(db.Integer, primary_key=True)
     role_name = db.Column(db.String(50), nullable=False, unique=True)
-
-    def __init__(self, role_name):
-        self.role_name = role_name
 
 
 class UserRoles(db.Model, RoleMixin):
@@ -67,29 +56,72 @@ class Course(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     course_name = db.Column(db.String(50), nullable=False)  # TODO progress reference, topic reference
     progresses = db.relationship('Progress', backref='course', lazy='dynamic')
-    topics = db.relationship('Topic', backref='course', lazy='dynamic')
+    topics = db.relationship('Topic', cascade="all,delete", backref='course', lazy='dynamic')
+    exams = db.relationship('Exam', cascade="all,delete", backref='Course', lazy='dynamic')
+    exam_due_dates = db.relationship('ExamDueDates', cascade="all,delete", backref='Course', lazy='dynamic')
+    mentor_of_course = db.relationship('MentorOfCourse', cascade="all,delete", backref='Course', lazy='dynamic')
+
+
+class Team(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    team_name = db.Column(db.String(50), nullable=False, unique=True)
+    training_courses = db.relationship('TrainingCourses', cascade="all,delete", backref='team', lazy='dynamic')
+    team_lead_of_teams = db.relationship('TeamLeadOfTeam', cascade="all,delete", backref='team', lazy='dynamic')
+
+
+class TrainingCourses(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    course_id = db.Column(db.Integer, db.ForeignKey('course.id'), nullable=False)
+    team_id = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=False)
+    training_queue = db.Column(db.Integer, unique=True, nullable=False)
+
+
+class TeamLeadOfTeam(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    team_id = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+
+class MentorOfCourse(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    course_id = db.Column(db.Integer, db.ForeignKey('course.id'), nullable=False)
 
 
 class Topic(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     topic_name = db.Column(db.String(100), nullable=False)
     course_id = db.Column(db.Integer, db.ForeignKey('course.id'), nullable=False)  # TODO subtopic reference
-    subtopics = db.relationship('Subtopic', backref='topic', lazy='dynamic')
+    topic_queue = db.Column(db.Integer, nullable=False)
+    subtopics = db.relationship('Subtopic', cascade="all,delete", backref='topic', lazy='dynamic')
+    source_of_learning = db.relationship('SourceOfLearning', backref='topic', lazy='dynamic')
 
 
 class Subtopic(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     subtopic_name = db.Column(db.String(255), nullable=False)
     topic_id = db.Column(db.Integer, db.ForeignKey('topic.id'), nullable=False)
-    questions = db.relationship('Question', backref='subtopic', lazy='dynamic')
-    exercises = db.relationship('Exercise', backref='subtopic', lazy='dynamic')
-    subtopicgroups = db.relationship('SubTopicGroup', backref='subtopic', lazy='dynamic')
+    subtopic_queue = db.Column(db.Integer, nullable=False)
+    questions = db.relationship('Question', cascade="all,delete", backref='subtopic', lazy='dynamic')
+    exercises = db.relationship('Exercise', cascade="all,delete", backref='subtopic', lazy='dynamic')
+    subtopicgroups = db.relationship('SubTopicGroup', cascade="all,delete", backref='subtopic', lazy='dynamic')
+    source_of_learning = db.relationship('SourceOfLearning', cascade="all,delete", backref='subtopic', lazy='dynamic')
+
+
+class SourceOfLearning(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    source_name = db.Column(db.String(255), nullable=True)
+    source_link = db.Column(db.String(255), nullable=True)
+    source_plain_text = db.Column(db.Text, nullable=True)
+    topic_id = db.Column(db.Integer, db.ForeignKey('topic.id'), nullable=True)
+    subtopic_id = db.Column(db.Integer, db.ForeignKey('subtopic.id'), nullable=True)
+    source_queue = db.Column(db.Integer, nullable=False)
 
 
 class Group(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     groupname = db.Column(db.String(50), nullable=False)
-    subtopicgroups = db.relationship('SubTopicGroup', backref='group', lazy='dynamic')
+    subtopicgroups = db.relationship('SubTopicGroup', cascade="all,delete", backref='group', lazy='dynamic')
 
 
 class SubTopicGroup(db.Model):
@@ -102,8 +134,8 @@ class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     question_context = db.Column(db.Text, nullable=False)
     subtopic_id = db.Column(db.Integer, db.ForeignKey('subtopic.id'), nullable=False)
-    trueanswers = db.relationship('TrueAnswer', backref='question', lazy='dynamic')
-    falseanswers = db.relationship('FalseAnswer', backref='question', lazy='dynamic')
+    trueanswers = db.relationship('TrueAnswer', cascade="all,delete", backref='question', lazy='dynamic')
+    falseanswers = db.relationship('FalseAnswer', cascade="all,delete", backref='question', lazy='dynamic')
 
 
 class TrueAnswer(db.Model):
@@ -124,13 +156,22 @@ class Exercise(db.Model):
     subtopic_id = db.Column(db.Integer, db.ForeignKey('subtopic.id'), nullable=False)  # TODO
 
 
-def create_superuser():
-    user = User(firstname='admin',
-                lastname='admin',
-                username='admin',
-                password=generate_hash('123456'),
-                email='admin@admin.am',
-                phone='123456',
-                birtday='1985-07-21')
-    db.session.add(user)
-    db.session.commit()
+class ExamResult(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    grade = db.Column(db.Integer, nullable=False)
+    pdf_link = db.Column(db.String(255), nullable=False)
+    exams = db.relationship('Exam', cascade="all,delete", backref='ExamResult', lazy='dynamic')
+
+
+class Exam(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    exam_result_id = db.Column(db.Integer, db.ForeignKey('exam_result.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    course_id = db.Column(db.Integer, db.ForeignKey('course.id'), nullable=False)
+
+
+class ExamDueDates(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    course_id = db.Column(db.Integer, db.ForeignKey('course.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    exam_expected_date = db.Column(db.Date, nullable=False)
