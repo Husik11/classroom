@@ -3,7 +3,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
-import goya from "./image/goya.png";
+import goya from "../../image/goya.png";
 const Navbar = () => {
   return (
     <>

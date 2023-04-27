@@ -1,6 +1,6 @@
 import React from "react";
-import Card from "./Card"
-import Sdata from "./Sdata"
+import Card from "../Card/Card"
+import Sdata from "../Sdata/Sdata"
 
 function Service() {
   return (

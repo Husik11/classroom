@@ -1,6 +1,6 @@
 import React from "react";
-import web from "../src/image/getStarted.png";
-import Common from "./Common";
+import web from "../../image/getStarted.png";
+import Common from "../Common/Common";
 
 function Home() {
   return (

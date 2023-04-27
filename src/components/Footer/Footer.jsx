@@ -1,7 +1,7 @@
 import React from "react";
-import ld from "./image/white_linkedin.svg";
-import fb from "./image/facebook_white.svg";
-import goya from "./image/white_logo.png";
+import ld from "../../image/white_linkedin.svg";
+import fb from "../../image/facebook_white.svg";
+import goya from "../../image/white_logo.png";
 const Footer = () => {
   return (
     <>
