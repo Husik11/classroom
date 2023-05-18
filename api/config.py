@@ -14,12 +14,14 @@ class Config:
 
 
 class DevEnvConfig(Config):
-    HOST = '127.0.0.1'
+    HOST = '0.0.0.0'
     PORT = 5000
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = "sqlite:////home/davit/Desktop/projects/personal/classroom/api/classroom.db"
+    SQLALCHEMY_DATABASE_URI = f"sqlite:///{current_path}/classroom.db"
     UPLOAD_FOLDER = os.path.join(current_path, 'videos')
 
 
 
 
+if __name__ == "__main__":
+    print(current_path)

@@ -33,7 +33,7 @@ def login_admin():
 
 @app.route('/admin/get_<userrole>s')
 @jwt_required()
-def get_admins(userrole):
+def get_users(userrole):
     if request.method == 'GET':
         role_id = Role.query.filter_by(role_name=userrole).first()
         if role_id:
@@ -100,9 +100,38 @@ def register_user():
         return jsonify(message='bad request'), 400
     return jsonify(message='Method Not Allowed'), 405
 
-@app.route('/admin/delete_user')
-def delete_user():
-    pass
+
+@app.route('/admin/delete_user/<id>', methods=['DELETE'])
+@jwt_required()
+def delete_user(id):
+    if request.method == 'DELETE':
+        user = User.query.filter_by(id=id).first()
+        if user:
+            db.session.delete(user)
+            db.session.commit()
+        else:
+            return jsonify(message='bad request'), 400
+    return jsonify({'message': 'User deleted successfully'}), 200
+
+
+@app.route('/admin/attache_mentor_course', methods=['POST'])
+@jwt_required()
+def attache_mentor_course():
+    data = request.json
+    if request.method == 'POST':
+        course_id = data.get('course_id')
+        mentor_id = data.get('mentor_id')
+        if mentor_id and course_id:
+            attach_mentor = MentorOfCourse(user_id=mentor_id, course_id=course_id)
+            db.session.add(attach_mentor)
+            db.session.commit()
+            return jsonify({'message': 'Mentor attached successfully'}), 200
+        else:
+            return jsonify(message='bad request'), 400
+
+
+
+
 
 
 # @app.route('/admin', methods=['GET', 'POST'])
