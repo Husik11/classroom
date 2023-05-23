@@ -6,29 +6,29 @@ const Footer = () => {
   return (
     <>
       <footer className="text-center">
-        <div class="Footer_footerBg__vvFZO">
-          <div class="Footer_footer__1IwEk">
-            <div class="Footer_leftSide__zOUic">
-              <div class="Footer_items__jPN5n">
-                <section class="Footer_contacts__U5xtT">
-                  <a href="mailto:info@goya.am" class="Footer_item__YyNR2">
+        <div className="Footer_footerBg__vvFZO">
+          <div className="Footer_footer__1IwEk">
+            <div className="Footer_leftSide__zOUic">
+              <div className="Footer_items__jPN5n">
+                <section className="Footer_contacts__U5xtT">
+                  <a href="mailto:info@goya.am" className="Footer_item__YyNR2">
                     info@goya.am
                   </a>
-                  <a href="tel: +37455575332" class="Footer_item__YyNR2">
+                  <a href="tel: +37455575332" className="Footer_item__YyNR2">
                     +374 55 575332
                   </a>
-                  <span class="Footer_item__YyNR2">
+                  <span className="Footer_item__YyNR2">
                     24/15 Azatutyan Ave., Yerevan
                   </span>
                 </section>
-                <section class="Footer_col__HXN_W"></section>
+                <section className="Footer_col__HXN_W"></section>
               </div>
             </div>
-            <div class="Footer_middle__hh27G">
-              <a class="Footer_item__YyNR2" href="/hy">
+            <div className="Footer_middle__hh27G">
+              <a className="Footer_item__YyNR2" href="/hy">
                 <img src={goya} alt="logo" />
               </a>
-              <section class="Footer_socialLinks__gIVF8">
+              <section className="Footer_socialLinks__gIVF8">
                 <a
                   href="https://www.facebook.com/goyaschool/"
                   target="_blank"
@@ -45,7 +45,7 @@ const Footer = () => {
                 </a>
               </section>
             </div>
-            <div class="Footer_rightSide__ipH0R"></div>
+            <div className="Footer_rightSide__ipH0R"></div>
           </div>
         </div>
       </footer>

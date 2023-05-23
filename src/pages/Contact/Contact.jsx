@@ -3,7 +3,7 @@ import React, { useState } from "react";
 function Contact() {
   const [data, setData] = useState({
     fullname: "",
-    email: "",
+    username: "",
     phone: "",
     msg: "",
   });
@@ -19,7 +19,7 @@ function Contact() {
   };
   const formSubmit = (e) => {
     e.preventDefault();
-    alert(`asdasd${data.fullname}, wdasdasd ${data.email}, dasdasd ${data.phone}, fcsdcsdc ${data.msg}`);
+    alert(`asdasd${data.fullname}, wdasdasd ${data.username}, dasdasd ${data.phone}, fcsdcsdc ${data.msg}`);
   };
   return (
     <>
@@ -30,13 +30,13 @@ function Contact() {
         <div className="row">
           <div className="col-md-6 col-10 mx-auto">
             <form onSubmit={formSubmit}>
-              <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">
+              <div className="mb-3">
+                <label htmlFor="exampleFormControlInput1" className="form-label">
                   FullName
                 </label>
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   id="exampleFormControlInput1"
                   name="fullname"
                   value={data.fullname}
@@ -44,27 +44,27 @@ function Contact() {
                   placeholder="Enter your name"
                 />
               </div>
-              <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">
-                  Email address
+              <div className="mb-3">
+                <label htmlFor="exampleFormControlInput1" className="form-label">
+                username
                 </label>
                 <input
-                  type="email"
-                  class="form-control"
+                  type="text"
+                  className="form-control"
                   id="exampleFormControlInput1"
-                  name="email"
-                  value={data.email}
+                  name="username"
+                  value={data.username}
                   onChange={InputEvent}
                   placeholder="name@example.com"
                 />
               </div>
-              <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">
+              <div className="mb-3">
+                <label htmlFor="exampleFormControlInput1" className="form-label">
                   Phone
                 </label>
                 <input
                   type="number"
-                  class="form-control"
+                  className="form-control"
                   id="exampleFormControlInput1"
                   name="phone"
                   value={data.phone}
@@ -72,20 +72,20 @@ function Contact() {
                   placeholder="mobile number"
                 />
               </div>
-              <div class="mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label">
+              <div className="mb-3">
+                <label htmlFor="exampleFormControlTextarea1" className="form-label">
                   Message
                 </label>
                 <textarea
-                  class="form-control"
+                  className="form-control"
                   id="exampleFormControlTextarea1"
                   rows="3"
                   name="msg"
                   value={data.msg}
                   onChange={InputEvent}
                 ></textarea>
-                <div class="col-12">
-                  <button class="btn btn-outline-primary" type="submit">
+                <div className="col-12">
+                  <button className="btn btn-outline-primary" type="submit">
                     Submit form
                   </button>
                 </div>

@@ -28,13 +28,13 @@ function Login() {
         <div className="row">
           <div className="col-md-6 col-10 mx-auto">
             <form onSubmit={formSubmit}>
-              <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">
+              <div className="mb-3">
+                <label htmlFor="exampleFormControlInput1" className="form-label">
                   Login
                 </label>
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   id="exampleFormControlInput1"
                   name="login"
                   value={data.login}
@@ -42,13 +42,13 @@ function Login() {
                   placeholder="Enter your login"
                 />
               </div>
-              <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">
+              <div className="mb-3">
+                <label htmlFor="exampleFormControlInput1" className="form-label">
                   Password
                 </label>
                 <input
                   type="password"
-                  class="form-control"
+                  className="form-control"
                   id="exampleFormControlInput1"
                   name="password"
                   value={data.password}
@@ -56,10 +56,10 @@ function Login() {
                   placeholder="name@example.com"
                 />
               </div>              
-              <div class="mb-3">
+              <div className="mb-3">
                 
-                <div class="col-12">
-                  <button class="btn btn-outline-primary" type="submit">
+                <div className="col-12">
+                  <button className="btn btn-outline-primary" type="submit">
                     Submit
                   </button>
                 </div>
@@ -71,5 +71,6 @@ function Login() {
     </>
   );
 }
+
 
 export default Login;

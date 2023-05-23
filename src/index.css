@@ -4,9 +4,9 @@
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
-.navbar {
+/* .navbar {
   background-color: #fff !important;
-}
+} */
 
 .navbar-brand {
   font-size: 1.9rem !important;
@@ -212,7 +212,7 @@ footer p {
   margin-top: 25px;
 }
 
-.Footer_col__HXN_W{
+.Footer_col__HXN_W {
   margin: 0;
   padding: 0;
   font: inherit;
@@ -225,7 +225,7 @@ footer p {
   gap: 32px;
 }
 
-.Footer_item__YyNR2{
+.Footer_item__YyNR2 {
   margin: 0;
   padding: 0;
   font: inherit;
@@ -238,7 +238,7 @@ footer p {
   text-transform: capitalize;
 }
 
-.Footer_middle__hh27G{
+.Footer_middle__hh27G {
   margin: 0;
   padding: 0;
   font: inherit;
@@ -251,7 +251,7 @@ footer p {
   justify-content: center;
 }
 
-.Footer_item__YyNR2{
+.Footer_item__YyNR2 {
   margin: 0;
   padding: 0;
   font: inherit;
@@ -263,7 +263,7 @@ footer p {
   font-family: Lato;
 }
 
-.Footer_socialLinks__gIVF8{
+.Footer_socialLinks__gIVF8 {
   margin: 0;
   padding: 0;
   font: inherit;
@@ -277,7 +277,7 @@ footer p {
   align-items: center;
 }
 
-.Footer_rightSide__ipH0R{
+.Footer_rightSide__ipH0R {
   margin: 0;
   padding: 0;
   font: inherit;
@@ -288,7 +288,7 @@ footer p {
   flex-direction: column;
 }
 
-.Footer_header__YhDIT{
+.Footer_header__YhDIT {
   margin: 0;
   padding: 0;
   font: inherit;
@@ -302,7 +302,7 @@ footer p {
   margin-bottom: 30px;
 }
 
-.Footer_contacts__U5xtT{
+.Footer_contacts__U5xtT {
   margin: 0;
   padding: 0;
   font: inherit;
@@ -314,7 +314,7 @@ footer p {
   gap: 32px;
 }
 
-.Footer_item__YyNR2{
+.Footer_item__YyNR2 {
   margin: 0;
   padding: 0;
   font: inherit;
