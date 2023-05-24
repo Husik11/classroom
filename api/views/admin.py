@@ -130,8 +130,49 @@ def attache_mentor_course():
             return jsonify(message='bad request'), 400
 
 
+@app.route('/admin/add_course', methods=['POST'])
+@jwt_required()
+def admin_add_course():
+    data = request.json
+    if request.method == 'POST':
+        course_name = data.get('course_name')
+        if course_name:
+            course = Course(course_name=course_name)
+            db.session.add(course)
+            db.session.commit()
+            return jsonify({'message': 'Course add successfully'}), 200
+    else:
+        return jsonify(message='bad request'), 400
 
 
+
+@app.route('/admin/edit_course', methods=['PUT'])
+@jwt_required()
+def admin_edit_course():
+    data = request.json
+    if request.method == 'PUT':
+        course_id = data.get('id')
+        course_new_name = data.get('course_new_name')
+        course = Course.query.filter_by(id=course_id).first()
+        if course:
+            course.course_name = course_new_name
+            db.session.commit()
+            return jsonify({'message': 'Course edited successfully'}), 200
+    else:
+        return jsonify(message='bad request'), 400
+
+
+@app.route('/admin/delete_course/<id>', methods=['DELETE'])
+@jwt_required()
+def admin_delete_course(id):
+    if request.method == 'DELETE':
+        course = Course.query.filter_by(id=id).first()
+        if course:
+            db.session.delete(course)
+            db.session.commit()
+        else:
+            return jsonify(message='bad request'), 400
+    return jsonify({'message': 'Course deleted successfully'}), 200
 
 
 # @app.route('/admin', methods=['GET', 'POST'])
