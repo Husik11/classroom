@@ -1,6 +1,7 @@
 from flask import render_template, request, redirect, url_for, flash, jsonify
 from flask_login import login_user, logout_user, login_required, current_user
 from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required
+from flask_cors import cross_origin
 
 # from flask_security import roles_required
 from datetime import date, datetime
@@ -17,6 +18,7 @@ def load_user(user_id):
 
 
 @app.route('/admin/login', methods=['POST', 'GET'])
+@cross_origin(supports_credentials=True)
 def login_admin():
     if request.method == 'POST':
         data = request.json
@@ -141,9 +143,10 @@ def admin_add_course():
             db.session.add(course)
             db.session.commit()
             return jsonify({'message': 'Course add successfully'}), 200
+        else:
+            return jsonify(message='bad request'), 400
     else:
         return jsonify(message='bad request'), 400
-
 
 
 @app.route('/admin/edit_course', methods=['PUT'])
@@ -158,8 +161,9 @@ def admin_edit_course():
             course.course_name = course_new_name
             db.session.commit()
             return jsonify({'message': 'Course edited successfully'}), 200
-    else:
-        return jsonify(message='bad request'), 400
+        else:
+            jsonify(message='bad request'), 400
+    return jsonify(message='bad request'), 400
 
 
 @app.route('/admin/delete_course/<id>', methods=['DELETE'])
@@ -173,7 +177,6 @@ def admin_delete_course(id):
         else:
             return jsonify(message='bad request'), 400
     return jsonify({'message': 'Course deleted successfully'}), 200
-
 
 # @app.route('/admin', methods=['GET', 'POST'])
 # @app.route('/admin/', methods=['GET', 'POST'])
