@@ -192,6 +192,8 @@ def admin_add_team():
             return jsonify({'message': 'Team add successfully'}), 200
         else:
             return jsonify(message='bad request'), 400
+    else:
+        return jsonify(message='bad request'), 400
 
 
 @app.route('/admin/edit_team', methods=['PUT'])
@@ -208,6 +210,8 @@ def admin_edit_team():
             return jsonify({'message': 'Team edited successfully'}), 200
         else:
             return jsonify(message='bad request'), 400
+    else:
+        return jsonify(message='bad request'), 400
 
 
 @app.route('/admin/delete_team/<id>', methods=['DELETE'])
@@ -221,7 +225,26 @@ def admin_delete_team(id):
             return ({'message': 'Team deleted successfully'}), 200
         else:
             return jsonify(message='bad request'), 400
+    else:
+        return jsonify(message='bad request'), 400
 
+
+@app.route('/admin/attach_to_team', methods=['POST'])
+@jwt_required()
+def admin_attach_to_team():
+    data = request.json
+    if request.method == 'POST':
+        team_id = data.get('team_id')
+        teamlead_id = data.get('teamlead_id')
+        if team_id and teamlead_id:
+            attach_teamlaed = TeamLeadOfTeam(user_id=teamlead_id, team_id=team_id)
+            db.session.add(attach_teamlaed)
+            db.session.commit()
+            return jsonify({'message': 'TeamLead attached to the team successfully'}), 200
+        else:
+            return jsonify(message='bad request'), 400
+    else:
+        return jsonify(message='bad request'), 400
 
 # @app.route('/admin', methods=['GET', 'POST'])
 # @app.route('/admin/', methods=['GET', 'POST'])
