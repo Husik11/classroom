@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 from flask_login import LoginManager
 from flask_jwt_extended import JWTManager
+from flask_cors import CORS, cross_origin
 from flask_wtf.csrf import CSRFProtect
 from werkzeug.utils import secure_filename
 
@@ -13,6 +14,9 @@ app = Flask(__name__, template_folder='templates', static_folder='static')
 app.config.from_object(DevEnvConfig)
 db = SQLAlchemy()
 db.init_app(app)
+
+cors = CORS(support_credentials=True)
+cors.init_app(app)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
