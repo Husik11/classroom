@@ -178,6 +178,51 @@ def admin_delete_course(id):
             return jsonify(message='bad request'), 400
     return jsonify({'message': 'Course deleted successfully'}), 200
 
+
+@app.route('/admin/add_team', methods=['POST'])
+@jwt_required()
+def admin_add_team():
+    if request.method == 'POST':
+        data = request.json
+        team_name = data.get('team_name')
+        if team_name:
+            team = Team(team_name=team_name)
+            db.session.add(team)
+            db.session.commit()
+            return jsonify({'message': 'Team add successfully'}), 200
+        else:
+            return jsonify(message='bad request'), 400
+
+
+@app.route('/admin/edit_team', methods=['PUT'])
+@jwt_required()
+def admin_edit_team():
+    data = request.json
+    if request.method == 'PUT':
+        team_id = data.get('id')
+        team_new_name = data.get('new_name')
+        team = Team.query.filter_by(id=team_id).first()
+        if team:
+            team.team_name = team_new_name
+            db.session.commit()
+            return jsonify({'message': 'Team edited successfully'}), 200
+        else:
+            return jsonify(message='bad request'), 400
+
+
+@app.route('/admin/delete_team/<id>', methods=['DELETE'])
+@jwt_required()
+def admin_delete_team(id):
+    if request.method == 'DELETE':
+        team = Team.query.filter_by(id=id).first()
+        if team:
+            db.session.delete(team)
+            db.session.commit()
+            return ({'message': 'Team deleted successfully'}), 200
+        else:
+            return jsonify(message='bad request'), 400
+
+
 # @app.route('/admin', methods=['GET', 'POST'])
 # @app.route('/admin/', methods=['GET', 'POST'])
 # # @roles_required('admin')
