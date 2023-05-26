@@ -145,7 +145,6 @@ def admin_add_course():
         return jsonify(message='bad request'), 400
 
 
-
 @app.route('/admin/edit_course', methods=['PUT'])
 @jwt_required()
 def admin_edit_course():
