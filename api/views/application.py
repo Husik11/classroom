@@ -1,10 +1,10 @@
 from flask import render_template, request, jsonify
 from flask_jwt_extended import create_access_token
 
-from app import app, login_manager
+from app import app, login_manager, db
 from forms import LoginForm
 from helpers import generate_hash
-from models import User, Course, Role, UserRoles, Topic, Subtopic, Exam, ExamResult, ExamDueDates
+from models import User, Course, Role, UserRoles, Topic, Subtopic, Exam, ExamResult, ExamDueDates, SourceOfLearningTextContent, SourceOfLearningVideoContent
 
 
 @login_manager.user_loader
@@ -100,7 +100,6 @@ def get_subtopic_by_topic(topic_name):
                     'queue': subtopic_result.subtopic_queue
                 }
                 subtopics.append(subtopic_data)
-
                 response = {
                     'topic': topic_name,
                     'subtopics': subtopics
@@ -145,7 +144,93 @@ def get_took_exams():
         return jsonify(message='Bad request'), 400
 
 
-#TO DO
+@app.route('/add_topic/<course>', methods=['POST'])
+def add_topic(course):
+    if request.method == 'POST':
+        data = request.json
+        course_instance = Course.query.filter_by(course_name=course).first()
+        if course_instance:
+            topic_name = data.get('topic_name')
+            topic_queue = data.get('topic_queue')
+            if topic_name:
+                topic = Topic(topic_name=topic_name, course_id=course_instance.id, topic_queue=topic_queue)
+                db.session.add(topic)
+                db.session.commit()
+                return jsonify({'message': 'Topic add successfully'}), 200
+            else:
+                return jsonify(message='Bad request'), 400
+        else:
+            return jsonify(messqage='Course not found'), 400
+    else:
+        return jsonify(message='Bad request'), 400
+
+
+@app.route('/add_subtopic/<course>', methods=['POST'])
+def add_subtopic(course):
+    if request.method == 'POST':
+        data = request.json
+        topic_name = data.get('topic_name')
+        subtopic_name = data.get('subtopic_name')
+        subtopic_queue = data.get('subtopic_queue')
+        if topic_name and subtopic_name and subtopic_queue:
+            course = Course.query.filter_by(course_name=course).first()
+            if course:
+                topic = Topic.query.filter_by(topic_name=topic_name).first()
+                if topic:
+                    subtopic = Subtopic(subtopic_name=subtopic_name, topic_id=topic.id, subtopic_queue=subtopic_queue)
+                    db.session.add(subtopic)
+                    db.session.commit()
+                    return jsonify({'message': 'Subtopic add successfully'}), 200
+                else:
+                    return jsonify(message='Topic not found'), 400
+            else:
+                return jsonify(message='Course not found'), 400
+        else:
+            return jsonify(message='topic or subtopic not found'), 400
+    else:
+        return jsonify(message='Bad request'), 400
+
+
+@app.route('/edit_topic/<course>/<topic_id>', methods=['PUT'])
+def edit_topic(course, topic_id):
+    if request.method == 'PUT':
+        data = request.json
+        topic_new_name = data.get('topic_new_name')
+        course = Course.query.filter_by(course_name=course).first()
+        if course:
+            topic = Topic.query.filter_by(id=topic_id).first()
+            if topic:
+                topic.topic_name = topic_new_name
+                db.session.commit()
+                return jsonify({'message': 'Topic edit successfully'}), 200
+            else:
+                return jsonify(message='Topic not found'), 400
+        else:
+            jsonify(message="Course not found"), 400
+    else:
+        return jsonify(message="Bad request"), 400
+
+
+@app.route('/delete_topic/<course>/<topic_id>', methods=['DELETE'])
+def delete_topic(course, topic_id):
+    if request.method == 'DELETE':
+        course = Course.query.filter_by(course_name=course).first()
+        if course:
+            topic = Topic.query.filter_by(id=topic_id).first()
+            if topic:
+                db.session.delete(topic)
+                db.session.commit()
+                return jsonify({'message': 'Deleted successfully'}), 200
+            else:
+                return jsonify(message='Topic not found'), 400
+        else:
+            return jsonify(message='Course not found'), 400
+    else:
+        return jsonify(message='Bad request'), 400
+
+
+#TO DO ---> Not completed because table "student_course" does not exist
+
 '''@app.route('/get_students_by_courses', methods=['POST'])'''
 # def get_students_by_courses():
 #     if request.method == 'POST':
@@ -172,12 +257,6 @@ def get_took_exams():
 #
 
 
-
-
-
-
-
-#
 # @app.route('/login', methods=['GET', 'POST'])
 # def login():
 #     form = LoginForm()
