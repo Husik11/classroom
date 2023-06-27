@@ -11,27 +11,28 @@ import { check } from "./http/userAPI";
 import Spinner from "react-bootstrap/Spinner";
 
 const App = observer(() => {
-  const { user } = useContext(Context);
-  const [loading, setLoading] = useState(true);
+  // const { user } = useContext(Context);
+  // const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    setTimeout(() => {
-      check()
-        .then((data) => {
-          user.setUser(true);
-          user.setIsAuth(true);
-        })
-        .finally(() => setLoading(false));
-    }, 1000);
-  }, [user]);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     check()
+  //       .then((data) => {
+  //         const isAuthenticated = Boolean(data); // Determine authentication status based on data
+  //         user.setUser(data); // Set the user object with the received data
+  //         user.setIsAuth(isAuthenticated); // Set the authentication status
+  //       })
+  //       .finally(() => setLoading(false));
+  //   }, 1000);
+  // }, [user]);
 
-  if (loading) {
-    return (
-      <>
-        <Spinner animation={"grow"} />
-      </>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <>
+  //       <Spinner animation={"grow"} />
+  //     </>
+  //   );
+  // }
 
   return (
     <>

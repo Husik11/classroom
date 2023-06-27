@@ -3,27 +3,27 @@ import { login } from "../../http/userAPI";
 import { observer } from "mobx-react-lite";
 import { Context } from "../../index";
 import { ADMIN_PAGE_ROUTE } from "../../utils/consts";
-import {
-  useHistory,
-  useLocation,
-} from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory } from "react-router-dom";
 
 const Admin = observer(() => {
   const { user } = useContext(Context);
-  const location = useLocation();
   const history = useHistory();
 
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
-  const signIn = async () => {
+  const click = async (e) => {
+    console.log(111111111111);
+    e.preventDefault();
     try {
       let data = await login(username, password);
-      user.setUser(user);
+      console.log(data);
+      user.setUser(data);
       user.setIsAuth(true);
       history.push(ADMIN_PAGE_ROUTE);
     } catch (e) {
-      alert(e.response.data.message);
+      console.log(e);
+      // alert(e.response.data.message);
     }
   };
 
@@ -37,8 +37,11 @@ const Admin = observer(() => {
           <div className="col-md-6 col-10 mx-auto">
             <form>
               <div className="mb-3">
-                <label htmlFor="exampleFormControlInput1" className="form-label">
-                  Admin
+                <label
+                  htmlFor="exampleFormControlInput1"
+                  className="form-label"
+                >
+                  Username
                 </label>
                 <input
                   type="text"
@@ -46,22 +49,27 @@ const Admin = observer(() => {
                   id="exampleFormControlInput1"
                   name="login"
                   value={username}
+                  autoComplete="username"
                   onChange={(e) => setUsername(e.target.value)}
                   placeholder="Enter your login"
                 />
               </div>
               <div className="mb-3">
-                <label htmlFor="exampleFormControlInput1" className="form-label">
+                <label
+                  htmlFor="exampleFormControlInput1"
+                  className="form-label"
+                >
                   Password
                 </label>
                 <input
                   type="password"
                   className="form-control"
-                  id="exampleFormControlInput1"
+                  id="exampleFormControlInput2"
                   name="password"
                   value={password}
-                  onChange={(e) => setUsername(e.target.value)}
-                  placeholder="name@example.com"
+                  autoComplete="current-password"
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter your password"
                 />
               </div>
               <div className="mb-3">
@@ -69,7 +77,7 @@ const Admin = observer(() => {
                   <button
                     className="btn btn-outline-primary"
                     type="submit"
-                    onClick={login}
+                    onClick={click}
                   >
                     Submit
                   </button>

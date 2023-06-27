@@ -6,7 +6,7 @@ function Common(props) {
     <>
       <section id="header" className="d-flex align-items-center">
         <div className="container-fluid">
-          <div className="row">
+          <div className="row aaaa__aaaa">
             <div className="col-10 mx-auto">
               <div className="row">
                 <div className="col-md-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex justify-content-center flex-column">

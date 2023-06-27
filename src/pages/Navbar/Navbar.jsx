@@ -6,12 +6,10 @@ import { Link } from "react-router-dom";
 import goya from "../../image/goya.png";
 import { Context } from "../..";
 import { observer } from "mobx-react-lite";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const Navbar = observer (() => {
 
   const { user } = useContext(Context);
-  const history = useHistory()
 
   const logOut = () => {
     user.setUser({})

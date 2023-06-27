@@ -1,15 +1,18 @@
 import axios from "axios";
 
 const $host = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  baseURL: "http://localhost:5000",
 });
 
 const $authHost = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  baseURL: "http://localhost:5000",
 });
 
 const authInterceptor = (config) => {
-  config.headers.authorization = `Bearer ${localStorage.getItem("token")}`;
+  const token = localStorage.getItem("token");
+  if (token) {
+    config.headers.authorization = `Bearer ${token}`;
+  }
   return config;
 };
 
