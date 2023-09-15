@@ -8,7 +8,7 @@ class Config:
     SECURITY_FRESHNESS_GRACE_PERIOD = 3600
     SECURITY_DEFAULT_REMEMBER_ME = True
     SECURITY_REGISTERABLE = True
-    JWT_SECRET_KEY = 'secret_very_secret'
+    # JWT_SECRET_KEY = 'secret_very_secret'
 
 
 
